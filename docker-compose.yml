@@ -1,0 +1,15 @@
+version: '2'
+
+services:
+
+  wordpress:
+    image: wordpress
+    ports:
+      - 8082:80
+    environment:
+      WORDPRESS_DB_PASSWORD: eRdesjb8TJBmiapsVcfYVjCM
+
+  mysql:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: eRdesjb8TJBmiapsVcfYVjCM
