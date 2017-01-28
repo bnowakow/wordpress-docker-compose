@@ -1,2 +1,4 @@
-variables.env
+.env
 *.swp
+data/
+
