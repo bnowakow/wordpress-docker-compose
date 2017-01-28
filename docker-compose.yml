@@ -1,4 +1,4 @@
-version: '2'
+version: '3.0'
 
 services:
 
@@ -10,7 +10,7 @@ services:
       - variables.env
     volumes:
       - ./data/wordpress:/var/www/html
-
+    restart: always
 
   mysql:
     image: mariadb
@@ -18,5 +18,5 @@ services:
       - variables.env
     volumes:
       - ./data/mysql:/var/lib/mysql
-
+    restart: always
 
