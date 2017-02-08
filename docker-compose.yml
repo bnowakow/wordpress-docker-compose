@@ -12,6 +12,8 @@ services:
     volumes:
       - ./data/wordpress:/var/www/html
     restart: always
+    depends_on:
+      - mysql
 
   mysql:
     container_name: ${DOMAIN}-mysql
@@ -21,3 +23,4 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
     restart: always
+
