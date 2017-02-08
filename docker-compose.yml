@@ -1,15 +1,23 @@
-version: '2'
+version: '3.0'
 
 services:
 
   wordpress:
+    container_name: ${DOMAIN}-wordpress
     image: wordpress
     ports:
-      - 8082:80
+      - ${PORT}:80
     environment:
-      WORDPRESS_DB_PASSWORD: eRdesjb8TJBmiapsVcfYVjCM
+       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./data/wordpress:/var/www/html
+    restart: always
 
   mysql:
+    container_name: ${DOMAIN}-mysql
     image: mariadb
     environment:
-      MYSQL_ROOT_PASSWORD: eRdesjb8TJBmiapsVcfYVjCM
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    restart: always
