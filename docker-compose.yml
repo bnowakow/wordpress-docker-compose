@@ -1,5 +1,9 @@
 version: '3.0'
 
+#    resources:
+#      limits:
+#        memory: 128M
+
 services:
 
   wordpress:
@@ -12,6 +16,8 @@ services:
     volumes:
       - ./data/wordpress:/var/www/html
     restart: always
+    depends_on:
+      - mysql
 
   mysql:
     container_name: ${DOMAIN}-mysql
@@ -21,3 +27,8 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
     restart: always
+#    mem_limit: 256m
+#    deploy:
+    resources:
+      limits:
+        memory: 128M
