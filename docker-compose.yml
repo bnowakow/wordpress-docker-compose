@@ -1,8 +1,4 @@
-version: '3.0'
-
-#    resources:
-#      limits:
-#        memory: 128M
+version: '2.0'
 
 services:
 
@@ -27,8 +23,9 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
     restart: always
-#    mem_limit: 256m
+#    mem_limit: 4000000000 # 1000000000 = 1G
+    mem_limit: 400m
 #    deploy:
-    resources:
-      limits:
-        memory: 128M
+#    resources:
+#      limits:
+#        memory: 400M
