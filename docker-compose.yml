@@ -10,7 +10,7 @@ services:
     environment:
        WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
        # TODO divide variables into host and tld because of "ERROR: $table_prefix in wp-config.php can only contain numbers, letters, and underscores."
-       WORDPRESS_TABLE_PREFIX: bnowakowski_
+       WORDPRESS_TABLE_PREFIX: noauthor_
        VIRTUAL_HOST: ${DOMAIN}
     volumes:
       - ./data/wordpress:/var/www/html
