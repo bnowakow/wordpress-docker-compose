@@ -2,21 +2,8 @@ version: '2.0'
 
 services:
 
-  wordpress:
-    container_name: ${DOMAIN}-wordpress
-    image: wordpress
-    ports:
-      - ${PORT}:80
-    environment:
-       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - ./data/wordpress:/var/www/html
-    restart: always
-    depends_on:
-      - mysql
-
   mysql:
-    container_name: ${DOMAIN}-mysql
+    container_name: shared-mysql
     image: mariadb
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
@@ -24,6 +11,17 @@ services:
       - ./data/mysql:/var/lib/mysql
     restart: always
     mem_limit: 400m
+    networks:
+      - default
+      - external_default
+
+# docker network create external_default
+networks:
+    external_default:
+      external: true
+
+#    network_mode: bridge
+
 #    deploy:
 #    resources:
 #      limits:
