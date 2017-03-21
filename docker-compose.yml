@@ -10,7 +10,7 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
     restart: always
-    mem_limit: 400m
+    mem_limit: 600m
     networks:
       - default
       - external_default
