@@ -6,10 +6,14 @@ start:
 stop:
 	docker-compose down
 
+console:
+	echo TODO
+	sudo docker exec -i -t bnowakowski.pl-wordpress /bin/bash
+
 stats:
 	echo TODO
-	docker stats pacemaker.eu.org-mysql
+	docker stats bnowakowski.pl-wordpress
 
 logs:
 	echo TODO
-	
+	docker logs -f bnowakowski.pl-wordpress
