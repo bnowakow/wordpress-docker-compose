@@ -1,4 +1,4 @@
-# TODO read domain from .env file to get container name to do console, logs etc
+DOMAIN=$(shell grep DOMAIN .env | sed -e 's/^DOMAIN=//')
 
 start:
 	docker-compose up
@@ -6,10 +6,11 @@ start:
 stop:
 	docker-compose down
 
+console:
+	docker exec -i -t $(DOMAIN)-wordpress /bin/bash
+
 stats:
-	echo TODO
-	docker stats pacemaker.eu.org-mysql
+	docker stats $(DOMAIN)-wordpress
 
 logs:
-	echo TODO
-	
+	docker logs -f $(DOMAIN)-wordpress
