@@ -1,6 +1,7 @@
 DB_PASSWORD=$(shell grep DB_PASSWORD .env | sed -e 's/^DB_PASSWORD=//')
 number_of_backpus_to_keep=10
 
+
 start:
 	docker-compose up
 
@@ -18,9 +19,7 @@ restore:
 	cat data/mysql-dumps/wordpress-PICK-BACKUP.sql | docker exec -i shared-mysql /usr/bin/mysql -u root --password="$DB_PASSWORD" wordpress
 
 stats:
-	echo TODO
-	docker stats pacemaker.eu.org-mysql
+	docker stats shared-mysql
 
 logs:
-	echo TODO
-	
+	docker logs -f shared-mysql
