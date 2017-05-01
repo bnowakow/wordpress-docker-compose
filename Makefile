@@ -1,4 +1,5 @@
 DB_PASSWORD=$(shell grep DB_PASSWORD .env | sed -e 's/^DB_PASSWORD=//')
+number_of_backpus_to_keep=10
 
 start:
 	docker-compose up
@@ -7,6 +8,7 @@ stop:
 	docker-compose down
 
 backup:
+	ls -1t data/mysql-dumps/* | tail -n +$(number_of_backpus_to_keep) | xargs rm;
 	docker exec shared-mysql /usr/bin/mysqldump -u root --password="$(DB_PASSWORD)" wordpress > data/mysql-dumps/wordpress-`date +%Y-%m-%d_%H-%M`.sql
 
 restore:
