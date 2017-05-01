@@ -8,6 +8,7 @@ stop:
 	docker-compose down
 
 backup:
+	mkdir -p data/mysql-dumps/
 	ls -1t data/mysql-dumps/* | tail -n +$(number_of_backpus_to_keep) | xargs rm;
 	docker exec shared-mysql /usr/bin/mysqldump -u root --password="$(DB_PASSWORD)" wordpress > data/mysql-dumps/wordpress-`date +%Y-%m-%d_%H-%M`.sql
 
