@@ -1,0 +1,26 @@
+---
+version: "2"
+services:
+        piwigo:
+                image: linuxserver/piwigo
+                container_name: ${DOMAIN}
+                environment:
+                        - PUID=1000
+                        - PGID=1000
+                        - TZ=Europe/London
+                volumes:
+                        - ./config:/config
+                ports:
+                        - ${PORT}:80
+                        - 8088:443
+                restart: unless-stopped
+                external_links:
+                        - shared-mysql
+                networks:
+                        - default
+                        - external_default
+
+                          # docker network create external_default
+networks:
+        external_default:
+                external: true
