@@ -1,7 +1,7 @@
 DOMAIN=$(shell grep DOMAIN .env | sed -e 's/^DOMAIN=//')
 
 start:
-	docker-compose up
+	docker-compose up -d
 
 stop:
 	docker-compose down
