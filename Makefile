@@ -15,3 +15,6 @@ stats:
 logs:
 	docker logs -f $(DOMAIN)
 
+backup:
+	sudo tar --exclude='config/www/gallery' -czvf backups/config-without-photos-`date +%Y-%m-%d_%H-%M`.tar.gz  config/;
+
