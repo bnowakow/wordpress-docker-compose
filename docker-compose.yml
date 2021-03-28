@@ -1,27 +1,29 @@
-version: '2.0'
-
+version: "3"
 services:
-
-  wordpress:
-    container_name: ${DOMAIN}-wordpress
-    image: wordpress:5.6.2
+  valheim:
+    container_name: ${NAME}
+    image: bnowakow/mbround18-valheim:1.2.0-plus-upstream
     ports:
-      - ${PORT}:80
+      - 2456:2456/udp
+      - 2457:2457/udp
+      - 2458:2458/udp
     environment:
-       WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
-       # TODO divide variables into host and tld because of "ERROR: $table_prefix in wp-config.php can only contain numbers, letters, and underscores."
-       WORDPRESS_TABLE_PREFIX: bnowakowski_
-       VIRTUAL_HOST: ${DOMAIN}
-    volumes:
-      - ./data/wordpress:/var/www/html
+      - PORT=2456
+      - NAME="bnowakowski-aeonus"
+      - WORLD="RoguasWorld"
+      - PASSWORD=${PASSWORD}
+      - TZ=Europe/Warsaw
+      - PUBLIC=1
+      - AUTO_UPDATE=1
+      - AUTO_UPDATE_SCHEDULE="0 1 * * *"
+      - AUTO_BACKUP=1
+      - AUTO_BACKUP_SCHEDULE="*/15 * * * *"
+      - AUTO_BACKUP_REMOVE_OLD=1
+      - AUTO_BACKUP_DAYS_TO_LIVE=3
+      - AUTO_BACKUP_ON_UPDATE=1
+      - AUTO_BACKUP_ON_SHUTDOWN=1
     restart: always
-    external_links:
-      - shared-mysql
-    networks:
-      - default
-      - external_default
-
-# docker network create external_default
-networks:
-    external_default:
-      external: true
+    volumes:
+      - ./valheim/saves:/home/steam/.config/unity3d/IronGate/Valheim
+      - ./valheim/server:/home/steam/valheim
+      - ./valheim/backups:/home/steam/backups
