@@ -6,6 +6,9 @@ start:
 stop:
 	docker-compose down
 
+restart:
+	docker-compose restart
+
 console:
 	docker exec -i -t $(DOMAIN)-wordpress /bin/bash
 
