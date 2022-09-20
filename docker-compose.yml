@@ -4,7 +4,7 @@ services:
 
   mysql:
     container_name: shared-mysql
-    image: mariadb:10.7.3
+    image: mariadb:10.9.2
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
