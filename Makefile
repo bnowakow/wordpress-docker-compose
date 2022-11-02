@@ -1,3 +1,6 @@
+# https://unix.stackexchange.com/a/471113
+# :%s/^[ ]\+/\t/g
+
 DB_PASSWORD=$(shell grep DB_PASSWORD .env | sed -e 's/^DB_PASSWORD=//')
 number_of_backpus_to_keep=6
 
@@ -10,6 +13,12 @@ stop:
 
 mysql:
 	docker exec -it shared-mysql /usr/bin/mysql -u root --password="$(DB_PASSWORD)"
+
+upgrade:
+	docker exec -it shared-mysql /usr/bin/mysql_upgrade --user=root --password="$(DB_PASSWORD)"
+
+console:
+	docker exec -it shared-mysql bash
 
 backup:
 	mkdir -p data/mysql-dumps/
