@@ -1,5 +1,5 @@
 DB_PASSWORD=$(shell grep DB_PASSWORD .env | sed -e 's/^DB_PASSWORD=//')
-number_of_backpus_to_keep=20
+number_of_backpus_to_keep=6
 
 
 start:
