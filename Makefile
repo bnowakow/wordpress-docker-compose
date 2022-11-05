@@ -2,7 +2,8 @@
 # :%s/^[ ]\+/\t/g
 
 DB_PASSWORD=$(shell grep DB_PASSWORD .env | sed -e 's/^DB_PASSWORD=//')
-number_of_backpus_to_keep=6
+# that would be 4 files to be kept (we've 2 db's so 2 per db)
+number_of_backpus_to_keep=5
 
 
 start:
@@ -20,9 +21,14 @@ upgrade:
 console:
 	docker exec -it shared-mysql bash
 
+
+number_of_backup_files=$(shell ls -1t data/mysql-dumps/* | wc -l)
 backup:
 	mkdir -p data/mysql-dumps/
-	ls -1t data/mysql-dumps/* | tail -n +$(number_of_backpus_to_keep) | xargs rm;
+	echo $(number_of_backup_files);
+	if [ "$(number_of_backup_files)" -gt "$(number_of_backpus_to_keep)" ]; then\
+	    ls -1t data/mysql-dumps/* | tail -n +$(number_of_backpus_to_keep) | xargs rm;\
+	fi
 	docker exec shared-mysql /usr/bin/mysqldump -u root --password="$(DB_PASSWORD)" wordpress > data/mysql-dumps/wordpress-`date +%Y-%m-%d_%H-%M`.sql
 	docker exec shared-mysql /usr/bin/mysqldump -u root --password="$(DB_PASSWORD)" piwigo > data/mysql-dumps/piwigo-`date +%Y-%m-%d_%H-%M`.sql
 
