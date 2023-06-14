@@ -29,8 +29,8 @@ backup:
 	if [ "$(number_of_backup_files)" -gt "$(number_of_backpus_to_keep)" ]; then\
 	    ls -1t data/mysql-dumps/* | tail -n +$(number_of_backpus_to_keep) | xargs rm;\
 	fi
-	docker exec shared-mysql /usr/bin/mysqldump -u root --password="$(DB_PASSWORD)" wordpress > data/mysql-dumps/wordpress-`date +%Y-%m-%d_%H-%M`.sql
-	docker exec shared-mysql /usr/bin/mysqldump -u root --password="$(DB_PASSWORD)" piwigo > data/mysql-dumps/piwigo-`date +%Y-%m-%d_%H-%M`.sql
+	docker exec shared-mysql /usr/bin/mariadb-dump -u root --password="$(DB_PASSWORD)" wordpress > data/mysql-dumps/wordpress-`date +%Y-%m-%d_%H-%M`.sql
+	docker exec shared-mysql /usr/bin/mariadb-dump -u root --password="$(DB_PASSWORD)" piwigo > data/mysql-dumps/piwigo-`date +%Y-%m-%d_%H-%M`.sql
 
 restore:
 	# TODO ASK FOR CONFIRMATION BEFOREHANDS!
