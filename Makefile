@@ -16,7 +16,7 @@ mysql:
 	docker exec -it shared-mysql /usr/bin/mysql -u root --password="$(DB_PASSWORD)"
 
 upgrade:
-	docker exec -it shared-mysql /usr/bin/mysql_upgrade --user=root --password="$(DB_PASSWORD)"
+	docker exec -it shared-mysql /usr/bin/mariadb-upgrade --user=root --password="$(DB_PASSWORD)"
 
 console:
 	docker exec -it shared-mysql bash
