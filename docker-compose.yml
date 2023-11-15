@@ -4,7 +4,7 @@ services:
 
   wordpress:
     container_name: ${DOMAIN}-wordpress
-    image: wordpress:6.4.0
+    image: wordpress:6.4.1
     ports:
       - ${PORT}:80
     environment:
@@ -15,7 +15,6 @@ services:
     volumes:
       - ./data/wordpress:/var/www/html
     restart: always
-#    network_mode: bridge
     external_links:
       - shared-mysql
     networks:
