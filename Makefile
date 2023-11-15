@@ -1,3 +1,6 @@
+# https://stackoverflow.com/a/35050756
+# :%s/\(^\s*\)\@<=    /\t/g
+
 DOMAIN=$(shell grep DOMAIN .env | sed -e 's/^DOMAIN=//')
 
 start:
@@ -17,3 +20,10 @@ stats:
 
 logs:
 	docker logs -f $(DOMAIN)-wordpress
+
+# https://stackoverflow.com/a/49316987
+upgrade:
+	docker compose pull
+	docker compose stop
+	docker compose up -d --force-recreate
+
