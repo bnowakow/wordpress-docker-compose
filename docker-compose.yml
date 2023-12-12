@@ -2,7 +2,7 @@
 version: "2"
 services:
         piwigo:
-                image: linuxserver/piwigo:13.8.0
+                image: linuxserver/piwigo:14.0.0
                 container_name: ${DOMAIN}
                 environment:
                         - PUID=1000

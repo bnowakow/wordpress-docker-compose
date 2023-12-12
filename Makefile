@@ -1,3 +1,6 @@
+# https://stackoverflow.com/a/35050756
+# :%s/\(^\s*\)\@<=    /\t/g
+
 DOMAIN=$(shell grep DOMAIN .env | sed -e 's/^DOMAIN=//')
 
 start:
@@ -17,4 +20,10 @@ logs:
 
 backup:
 	sudo tar --exclude='config/www/gallery' -czvf backups/config-without-photos-`date +%Y-%m-%d_%H-%M`.tar.gz  config/;
+
+# https://stackoverflow.com/a/49316987
+upgrade:
+		docker compose pull
+		docker compose stop
+		docker compose up -d --force-recreate
 
