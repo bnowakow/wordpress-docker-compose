@@ -6,7 +6,7 @@ services:
     container_name: shared-mysql
     # https://community.home-assistant.io/t/mariadb-errors-after-update/424731
     # after upgrade run: make upgrade
-    image: mariadb:11.2.2
+    image: mariadb:11.2.3
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
