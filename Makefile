@@ -7,10 +7,10 @@ number_of_backpus_to_keep=5
 
 
 start:
-	docker-compose up -d
+	docker compose up -d
 
 stop:
-	docker-compose down
+	docker compose stop
 
 mysql:
 	docker exec -it shared-mysql /usr/bin/mysql -u root --password="$(DB_PASSWORD)"
