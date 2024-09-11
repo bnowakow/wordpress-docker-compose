@@ -1,10 +1,8 @@
-version: '2.0'
-
 services:
 
   wordpress:
     container_name: ${DOMAIN}-wordpress
-    image: wordpress:6.6.1
+    image: wordpress:6.6.2
     ports:
       - ${PORT}:80
     environment:
