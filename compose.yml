@@ -18,6 +18,12 @@ services:
     networks:
       - default
       - external_default
+    #mem_limit: 600m
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 600M
 
 # docker network create external_default
 networks:
