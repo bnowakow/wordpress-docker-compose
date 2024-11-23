@@ -16,6 +16,7 @@ mysql:
 	docker exec -it shared-mysql /usr/bin/mysql -u root --password="$(DB_PASSWORD)"
 
 upgrade:
+	make backup
 	docker compose pull
 	docker compose stop
 	docker compose up -d --force-recreate
