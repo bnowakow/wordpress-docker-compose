@@ -4,13 +4,13 @@
 DOMAIN=$(shell grep DOMAIN .env | sed -e 's/^DOMAIN=//')
 
 start:
-	docker-compose up -d
+	docker compose up -d
 
 stop:
-	docker-compose down
+	docker compose down
 
 restart:
-	docker-compose restart
+	docker compose restart
 
 console:
 	docker exec -i -t $(DOMAIN)-wordpress /bin/bash

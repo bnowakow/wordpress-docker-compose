@@ -2,10 +2,11 @@ services:
 
   wordpress:
     container_name: ${DOMAIN}-wordpress
-    image: wordpress:6.7.1
+    image: wordpress:6.7.2
     ports:
       - ${PORT}:80
     environment:
+       WORDPRESS_DB_USER: root
        WORDPRESS_DB_PASSWORD: ${DB_PASSWORD}
        # TODO divide variables into host and tld because of "ERROR: $table_prefix in wp-config.php can only contain numbers, letters, and underscores."
        WORDPRESS_TABLE_PREFIX: n2nieruchomosci_
