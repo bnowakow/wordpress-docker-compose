@@ -13,7 +13,7 @@ stop:
 	docker compose stop
 
 mysql:
-	docker exec -it shared-mysql /usr/bin/mysql -u root --password="$(DB_PASSWORD)"
+	docker exec -it shared-mysql /usr/bin/mariadb -u root --password="$(DB_PASSWORD)"
 
 upgrade:
 	make backup
@@ -39,10 +39,10 @@ backup:
 
 restore:
 	# TODO ASK FOR CONFIRMATION BEFOREHANDS!
-	#echo 'create database if not exists wordpress;' | docker exec -i shared-mysql /usr/bin/mysql -u root --password="$(DB_PASSWORD)"
-	#echo 'create database if not exists piwigo ;' | docker exec -i shared-mysql /usr/bin/mysql -u root --password="$(DB_PASSWORD)"
-	#cat data/mysql-dumps/$(shell ls -r1 data/mysql-dumps/wordpress* | head -1) | docker exec -i shared-mysql /usr/bin/mysql -u root --password="$(DB_PASSWORD)" wordpress
-	#cat $(shell ls -r1 data/mysql-dumps/piwigo* | head -1) | docker exec -i shared-mysql /usr/bin/mysql -u root --password="$(DB_PASSWORD)" piwigo
+	#echo 'create database if not exists wordpress;' | docker exec -i shared-mysql /usr/bin/mariadb -u root --password="$(DB_PASSWORD)"
+	#echo 'create database if not exists piwigo ;' | docker exec -i shared-mysql /usr/bin/mariadb -u root --password="$(DB_PASSWORD)"
+	#cat $(shell ls -r1 data/mysql-dumps/wordpress* | head -1) | docker exec -i shared-mysql /usr/bin/mariadb -u root --password="$(DB_PASSWORD)" wordpress
+	#cat $(shell ls -r1 data/mysql-dumps/piwigo* | head -1) | docker exec -i shared-mysql /usr/bin/mariadb -u root --password="$(DB_PASSWORD)" piwigo
 
 stats:
 	docker stats shared-mysql
