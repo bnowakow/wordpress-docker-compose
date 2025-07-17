@@ -2,7 +2,7 @@ services:
 
   wordpress:
     container_name: ${DOMAIN}-wordpress
-    image: wordpress:6.8.1
+    image: wordpress:6.8.2
     ports:
       - ${PORT}:80
     environment:
