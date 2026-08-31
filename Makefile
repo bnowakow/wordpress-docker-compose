@@ -20,7 +20,14 @@ upgrade:
 	docker compose pull
 	docker compose stop
 	docker compose up -d --force-recreate
-	sleep 120
+	@attempt=0; until docker exec shared-mysql /usr/bin/mariadb-admin ping --user=root --password="$(DB_PASSWORD)" --silent; do \
+		attempt=$$((attempt + 1)); \
+		if [ "$$attempt" -ge 120 ]; then \
+			echo "MySQL did not become ready within 120 seconds" >&2; \
+			exit 1; \
+		fi; \
+		sleep 1; \
+	done
 	docker exec -it shared-mysql /usr/bin/mariadb-upgrade --user=root --password="$(DB_PASSWORD)"
 
 console:
