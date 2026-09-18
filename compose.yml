@@ -10,7 +10,11 @@ services:
     volumes:
       - ./data/mysql:/var/lib/mysql
     restart: always
-    mem_limit: 600m
+    cpus: '1.50'
+    cpu_shares: 1024
+    mem_limit: 1024m
+    memswap_limit: 1024m
+    pids_limit: 256
     networks:
       - default
       - external_default
