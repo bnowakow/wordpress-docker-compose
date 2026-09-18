@@ -2,7 +2,7 @@ services:
 
   wordpress:
     container_name: ${DOMAIN}-wordpress
-    image: wordpress:7.1.0
+    image: wordpress:7.1.1
     ports:
       - ${PORT}:80
     environment:
@@ -12,19 +12,19 @@ services:
        WORDPRESS_TABLE_PREFIX: n2nieruchomosci_
        VIRTUAL_HOST: ${DOMAIN}
     volumes:
+      - ./config/apache/mpm_prefork.conf:/etc/apache2/mods-enabled/mpm_prefork.conf:ro
       - ./data/wordpress:/var/www/html
     restart: always
+    cpus: '0.50'
+    cpu_shares: 512
+    mem_limit: 512m
+    memswap_limit: 512m
+    pids_limit: 48
     external_links:
       - shared-mysql
     networks:
       - default
       - external_default
-    #mem_limit: 150m
-    deploy:
-      resources:
-        limits:
-          cpus: '0.10'
-          memory: 150M
 
 # docker network create external_default
 networks:
